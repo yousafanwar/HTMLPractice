@@ -39,8 +39,8 @@
 		// Nested loop
 		console.log('Nested loop')
 		let lineCharacter = '';
-		for (let i = 0; i <= 9; i++) {
-			for (let j = 0; j <= i; j++) { // This is a nested loop (loop inside another loop)
+		for (let i = 1; i <= 9; i++) {
+			for (let j = 0; j < i; j++) { // This is a nested loop (loop inside another loop)
 				lineCharacter += i;
 			}
 			console.log(lineCharacter);
