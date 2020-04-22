@@ -32,6 +32,16 @@
 		}
 		while (i <= 10);
 
+		// Nested loop
+		let lineCharacter = '';
+		for (let i = 0; i <= 9; i++) {
+			for (let j = 0; j <= i; j++) { // This is a nested loop (loop inside another loop)
+				lineCharacter += i;
+			}
+			console.log(lineCharacter);
+			lineCharacter = '';
+		}
+
 	</script>
 </body>
 
