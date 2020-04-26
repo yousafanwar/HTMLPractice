@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <div>
+    </div>
+
+    <script type="text/javascript">
+        // This is your approach
+        for (let x = '*'; x <= '**********'; x += '*') {
+            console.log(x);
+        }
+        // ends
+
+
+        // This is what I was expecting from you as I had'nt told you about string comparison operations:
+        let asterisks = ''; // This is just a string variable which will hold the string having asterisks. Let's set its
+                            // initial value to empty string
+
+        for (let line = 1; line <= 10; line++) {
+            // This loop will be responsible for lines. Because we are going to print stars on 10 lines, so loop for 10 lines.
+            for (let stars = 1; stars <= line; stars++) {
+                // And this inner loop (or nested loop) will be responsible for printing astersiks (*) in a way that first line will have only one asterisk,
+                // second will have 2 and third will have 3 and so on. That is why stars variable initial value has been set to 1 and will go upto the 
+                // the value of what line variable currently holds.
+                asterisks += '*' // Add one asterisk (*) to the variable asterisks
+            }
+            console.log(asterisks); // As we added asterisks to this variable now lets print it on console.
+            asterisks = '';         // Now we are going to move to the next line so let's reset the asterisks value to empty string.
+        }
+
+    </script>
+</body>
+
+</html>

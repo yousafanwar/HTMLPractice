@@ -7,25 +7,34 @@
 <body>
     <script type="text/javascript" > 
 
+        // Remove the below 3 lines. Everytime you have to press Ok button to continue the page loading.
         primarymessage ('Assignment 02');
             function primarymessage (message){
                 alert (message)
             }
 
-            supremeloop='';
+            supremeloop=''; // You have missed the "let" keyword here. Although the code will execute just fine but still you should follow
+                            // the proper rules. In short you have "initialized" a variable without "declaring" it, which creates a few problems
+                            // which we will discuss in later sessions.
 
-            for( a = '*'; a <= '***********'; a+= '*' ){
-            for( b = '*'; b < a; b+= '*'){
-              supremeloop+= '*';  
+            for( a = '*'; a <= '***********'; a+= '*' ){    // Ok this is interesting. Here you have used the concept of "string comparison"
+                                                            // which I have not introduced to you yet. We have previously compared numbers
+                                                            // like 3<4 or 5<=6 but I have not told you what happens when we "compare" two string
+                                                            // e.g. "ABC" < "ABCD". This is perfectly fine using it, and this approach
+                                                            // also prevents us from requiring to use "nested loop".
+            
+            for( b = '*'; b < a; b+= '*'){                  // So we don't need this loop now.
+              supremeloop+= '*';                            // remove this line too
 
-            }    
-                console.log(supremeloop);
-                supremeloop='';
+            }                                               // remove this line too
 
+                console.log(supremeloop);                   // Just consol.log(a) here. We don't need spremeloop variable at all.
+                supremeloop='';                             // Since we don't need supremeloop variable this line also will be removed.
+                                                            // Please see the code in the file Assignment02_Solution.html
 
             }
 
-
+            // A lot of unnecessery blank lines in the file, which are of no use. This should be avaoided.
 
 
 
