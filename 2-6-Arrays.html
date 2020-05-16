@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div>
+
+    </div>
+
+    <script type="text/javascript">
+
+        let x = [2, 3, 4, 5, 6];
+
+        console.log(x);
+
+        console.log(x.length);
+
+        for (let loop = 0; loop < x.length; loop++) {
+            console.log(x[loop]);
+        }
+
+        let stringAray = ['Bill Gates', 'Allen Paul', 'Steve Jobs', 'Steve Smith'];
+
+        for (let loop = 0; loop < stringAray.length; loop++) {
+            console.log(stringAray[loop]);
+
+            if (stringAray[loop] == 'Allen Paul') {
+                console.log('I found your record');
+                break;
+            }
+        }
+
+
+        let anotherStringArray = ['A', 'B', 'C', 'D', 'A', 'C', 'C', 'H'];
+        let toFind = 'C';
+        let countOfChar = 0;
+        for (let loop = 0; loop < anotherStringArray.length; loop++) {
+            if (anotherStringArray[loop] == toFind) {
+                countOfChar++;
+            }
+        }
+
+        console.log(toFind + ' is ' + countOfChar + ' times present in the array: anotherStringArray');
+
+    </script>
+</body>
+
+</html>
