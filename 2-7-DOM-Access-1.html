@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div>
+        <input id='meters' type="number" /> (meters)
+        <button onclick="DisplayResult()">Convert to Kilometers</button>
+        <input id='kilometers' type="number" />(kilometers)
+
+    </div>
+
+    <script type='text/javascript'>
+
+        console.log(document.getElementById('meters'));
+
+        function DisplayResult() {
+
+            let valueInMeter = document.getElementById('meters').value;
+            let valueInKilometers = valueInMeter / 1000;
+
+            document.getElementById('kilometers').value = valueInKilometers;
+
+        }
+
+    </script>
+
+</body>
+
+</html>

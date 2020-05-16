@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+    <div>
+        <input id='tableOf' type="number" />
+        <button onclick="DisplayTable()">Print Table</button>
+        
+        <div id='table'>
+        </div>
+
+    </div>
+
+    <script type='text/javascript'>
+
+        console.log(document.getElementById('table'));
+
+        function DisplayTable() {
+            let table = document.getElementById('tableOf').value;
+            document.getElementById('table').innerText = '';
+
+            for (let count = 1; count <= 10; count++) {
+                document.getElementById('table').innerHTML += table + ' x ' + count + ' = ' + table * count + '<br />';
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
