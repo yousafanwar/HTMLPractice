@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Check list App</title>
+    <style>
+
+    
+        li{
+                list-style: none;
+            }
+            body{
+                margin-right: 66%;
+
+}
+        .app {
+
+                border: solid black;
+            /*   border-spacing: 25px;*/
+                border-width: 3px;
+                height: 30px;
+                padding: 450px  ;
+                padding-top: 5px;
+                padding-left: 0.5px;
+                margin-top: -20px;
+
+            }
+
+        .checklist1{
+                width: 92%; 
+        }    
+            
+        </style>
+    
+</head>
+
+
+<body>
+
+    <div>
+     <input class="checklist1" id="checklist" type="text">   
+    <button onclick="DisplayResult()" >+</button> <br><br>
+    </div>   
+ 
+<br>
+
+<app  >
+
+<p id=ShowResult class="app" ></p>
+
+<script>
+    function DisplayResult() {
+      var x = document.createElement("INPUT");
+      x.setAttribute("type", "checkbox");
+      document.body.appendChild(x);
+     
+                    let li = document.createElement("LI");  
+                    let input = document.getElementById("checklist");
+                    li.innerHTML = input.value;
+                    input.value = "";
+                
+                    document.getElementById("ShowResult").appendChild(li);
+    
+                    let button1 = document.createElement('BUTTON');
+                    button1.innerHTML = '&#215';
+                    document.getElementById("ShowResult").appendChild(button1);
+
+
+                    let button2 = document.createElement('BUTTON');
+                    button2.innerHTML = '&#8595';
+                    document.getElementById("ShowResult").appendChild(button2);
+
+                    let button3 = document.createElement('BUTTON');
+                    button3.innerHTML = '&#8593';
+                    document.getElementById("ShowResult").appendChild(button3);
+    
+    
+                    let y =   document.body.appendChild(x);
+                    let y1 = document.getElementById("ShowResult").appendChild(li);
+                  
+                    document.getElementById('ShowResult').appendChild(y, y1);
+
+    
+    }
+    </script>
+
+
+     
+</app>
+
+
+
+</body>    
+</html>
