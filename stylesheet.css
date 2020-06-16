@@ -1,0 +1,28 @@
+body{
+    margin-right: 66%;
+
+}
+
+
+.app {
+
+    border: solid black;
+ /*   border-spacing: 25px;*/
+    border-width: 0.5px;
+    padding: 450px;
+    padding-top: 5px;
+    padding-left: 0.5px;
+}
+
+.buttons{
+    float: right; 
+}
+
+.checklist1{
+    width: 90%;
+}
+
+
+
+
+
