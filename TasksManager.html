@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>TODO supply a title</title>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+
+<body>
+	<div>
+		<input type="text" />
+		<button>+</button>
+	</div>
+
+	<div id='taskContainer'>
+
+	</div>
+
+
+
+
+
+	<script type="text/javascript">
+
+		LoadTasks();
+
+		function LoadTasks() {
+			let taskContainerDiv = document.getElementById('taskContainer');
+			taskContainerDiv.innerHTML = '';
+			let tasks = GetAllTasks();
+			console.log(tasks);
+			if (tasks == null || tasks.length == 0) {
+				taskContainerDiv.innerText = 'No tasks exist yet!'
+				return;
+			}
+
+			for (let loopCount = 0; loopCount < tasks.length; loopCount++) {
+
+				var template = `<div class='taskItem'>
+									<input type='checkbox' id='task${loopCount}' name='task${loopCount}' />
+									<label for='task${loopCount}'>${tasks[loopCount].name}</label>
+									<button>­&#8593;</button>
+									<button>&#8595;</button>
+									<button>X</button>
+								</div>`;
+				taskContainerDiv.insertAdjacentHTML('beforeend', template);
+			}
+		}
+
+		function AddTask(taskName) {
+			let tasks = GetAllTasks();
+			if (tasks == null || tasks.length == 0)
+				tasks = [];
+			tasks.push({ 'name': taskName, 'iscomplete': false });
+			SaveTasksInBrowserStorage(tasks);
+			LoadTasks();
+		}
+
+		function GetAllTasks() {
+			debugger;
+			let tasks = localStorage.getItem("tasks");
+			console.log(tasks);
+			return JSON.parse(tasks);
+		}
+
+		function SaveTasksInBrowserStorage(tasks) {
+			localStorage.setItem("tasks", JSON.stringify(tasks));
+		}
+	</script>
+</body>
+
+</html>
