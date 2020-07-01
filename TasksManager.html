@@ -9,40 +9,43 @@
 
 <body>
 	<div>
-		<input type="text" />
-		<button>+</button>
+		<input type="text" id='txtTaskName' />
+		<button id='btnAddTask' onclick="return OnAddTaskClickEvent(this);">+</button>
 	</div>
 
-	<div id='taskContainer'>
-
-	</div>
-
-
-
-
+	<div id='taskContainer'></div>
 
 	<script type="text/javascript">
 
 		LoadTasks();
 
+		function OnAddTaskClickEvent(btn) {
+			let taskName = document.getElementById('txtTaskName').value.trim();
+			if (taskName == '') {
+				alert("Enter task's name");
+				return;
+			}
+			AddTask(taskName);
+			document.getElementById('txtTaskName').value = '';
+			return false;
+		}
+
 		function LoadTasks() {
 			let taskContainerDiv = document.getElementById('taskContainer');
 			taskContainerDiv.innerHTML = '';
 			let tasks = GetAllTasks();
-			console.log(tasks);
 			if (tasks == null || tasks.length == 0) {
 				taskContainerDiv.innerText = 'No tasks exist yet!'
 				return;
 			}
 
 			for (let loopCount = 0; loopCount < tasks.length; loopCount++) {
-
-				var template = `<div class='taskItem'>
-									<input type='checkbox' id='task${loopCount}' name='task${loopCount}' />
-									<label for='task${loopCount}'>${tasks[loopCount].name}</label>
-									<button>­&#8593;</button>
-									<button>&#8595;</button>
-									<button>X</button>
+				let template = `<div class='taskItem' index='${loopCount}'>
+									<input ${tasks[loopCount].iscomplete ? "checked" : ""} type='checkbox' onclick='return OnDoneClickEvent(this);' id='chk_task_${loopCount}' />
+									<label ${tasks[loopCount].iscomplete ? "style='text-decoration: line-through;'" : ""} for='chk_task_${loopCount}'>${tasks[loopCount].name}</label>
+									<button onclick='return OnUpClickEvent(this);'>­&#8593;</button>
+									<button onclick='return OnDownClickEvent(this);'>&#8595;</button>
+									<button onclick='return OnDeleteEvent(this);'>X</button>
 								</div>`;
 				taskContainerDiv.insertAdjacentHTML('beforeend', template);
 			}
@@ -52,21 +55,65 @@
 			let tasks = GetAllTasks();
 			if (tasks == null || tasks.length == 0)
 				tasks = [];
+
 			tasks.push({ 'name': taskName, 'iscomplete': false });
 			SaveTasksInBrowserStorage(tasks);
 			LoadTasks();
 		}
 
 		function GetAllTasks() {
-			debugger;
 			let tasks = localStorage.getItem("tasks");
-			console.log(tasks);
 			return JSON.parse(tasks);
 		}
 
 		function SaveTasksInBrowserStorage(tasks) {
 			localStorage.setItem("tasks", JSON.stringify(tasks));
 		}
+
+		function SwapArrayElements(arrayObj, fromIndex, toIndex) {
+			let temp = arrayObj[fromIndex];
+			arrayObj[fromIndex] = arrayObj[toIndex];
+			arrayObj[toIndex] = temp;
+		}
+
+		function OnUpClickEvent(btn) {
+			let index = parseInt(btn.parentElement.getAttribute("index"), 10);
+			let tasks = GetAllTasks();
+			if (index < 1) return;
+			SwapArrayElements(tasks, index, index - 1);
+			SaveTasksInBrowserStorage(tasks);
+			LoadTasks();
+			return false;
+		}
+
+		function OnDownClickEvent(btn) {
+			let index = parseInt(btn.parentElement.getAttribute("index"), 10);
+			let tasks = GetAllTasks();
+			if (index >= tasks.length - 1) return;
+			SwapArrayElements(tasks, index, index + 1);
+			SaveTasksInBrowserStorage(tasks);
+			LoadTasks();
+			return false;
+		}
+
+		function OnDeleteEvent(btn) {
+			let index = parseInt(event.target.parentElement.getAttribute("index"), 10);
+			let tasks = GetAllTasks();
+			tasks.splice(index, 1);
+			SaveTasksInBrowserStorage(tasks);
+			LoadTasks();
+			return false;
+		}
+
+		function OnDoneClickEvent(chk) {
+			let index = parseInt(event.target.parentElement.getAttribute("index"), 10);
+			let tasks = GetAllTasks();
+			tasks[index].iscomplete = chk.checked ? true : false;
+			SaveTasksInBrowserStorage(tasks);
+			LoadTasks();
+			return false;
+		}
+
 	</script>
 </body>
 
