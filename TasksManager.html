@@ -13,32 +13,52 @@
 		<button id='btnAddTask' onclick="return OnAddTaskClickEvent(this);">+</button>
 	</div>
 
+	<!--This div will contain the list of our tasks-->
 	<div id='taskContainer'></div>
 
 	<script type="text/javascript">
 
+		// Let's load our tasks from our browser storage.
+		// We have not discussed browser storage before. It is not difficult. You can see it here: https://www.w3schools.com/jsref/prop_win_localstorage.asp.
+		// Browser storage will let us save the tasks in the browser's storage system and even when we close this html page in browser and open again, we will
+		// still have our tasks loaded in the browser.
+		// If there are saved tasks in the storage they will be displayed else we will show the message: "No tasks exist yet!"
 		LoadTasks();
 
 		function OnAddTaskClickEvent(btn) {
 			let taskName = document.getElementById('txtTaskName').value.trim();
 			if (taskName == '') {
+				// If the user has not entered any text in the textbox then we will show a prompt to the user and will exit from this function.
 				alert("Enter task's name");
 				return;
 			}
+			// Let's add the newly entered task in the storage.
 			AddTask(taskName);
+
+			// After adding the task we should clear the textbox's value.
 			document.getElementById('txtTaskName').value = '';
 			return false;
 		}
 
 		function LoadTasks() {
+			// Let's get the div where we have to display the tasks
 			let taskContainerDiv = document.getElementById('taskContainer');
+
+			// Because we are going to display the contents of the list taken from storage we will first clear the contents of our div.
 			taskContainerDiv.innerHTML = '';
+
+			// Let's get the tasks from storage.
 			let tasks = GetAllTasks();
+
 			if (tasks == null || tasks.length == 0) {
+				// If no tasks then display a text in the div and exit this function
 				taskContainerDiv.innerText = 'No tasks exist yet!'
 				return;
 			}
 
+			// If tasks found then let's display them.
+			// First we will loop for each item in the task array and will display the html for each task.
+			// This may be a new thing for you.
 			for (let loopCount = 0; loopCount < tasks.length; loopCount++) {
 				let template = `<div class='taskItem' index='${loopCount}'>
 									<input ${tasks[loopCount].iscomplete ? "checked" : ""} type='checkbox' onclick='return OnDoneClickEvent(this);' id='chk_task_${loopCount}' />
@@ -52,12 +72,19 @@
 		}
 
 		function AddTask(taskName) {
+			// First get the list of previously saved tasks. We will append our new task at the end of the list.
 			let tasks = GetAllTasks();
 			if (tasks == null || tasks.length == 0)
+				// If there are no tasks saved in the storage then we will create an empty array. We have discussed array before.
 				tasks = [];
 
+			// This will add a new item at the end of the task list
 			tasks.push({ 'name': taskName, 'iscomplete': false });
+
+			// Let's save our updated list in the storage.
 			SaveTasksInBrowserStorage(tasks);
+
+			// And let's call this function to display the tasks in the div
 			LoadTasks();
 		}
 
@@ -70,12 +97,14 @@
 			localStorage.setItem("tasks", JSON.stringify(tasks));
 		}
 
+		// This function is used for move up and move down functionality.
 		function SwapArrayElements(arrayObj, fromIndex, toIndex) {
 			let temp = arrayObj[fromIndex];
 			arrayObj[fromIndex] = arrayObj[toIndex];
 			arrayObj[toIndex] = temp;
 		}
 
+		// When Move Up button clicked
 		function OnUpClickEvent(btn) {
 			let index = parseInt(btn.parentElement.getAttribute("index"), 10);
 			let tasks = GetAllTasks();
@@ -86,6 +115,7 @@
 			return false;
 		}
 
+		// When Move Down button clicked
 		function OnDownClickEvent(btn) {
 			let index = parseInt(btn.parentElement.getAttribute("index"), 10);
 			let tasks = GetAllTasks();
@@ -96,6 +126,7 @@
 			return false;
 		}
 
+		// When Delete button clicked
 		function OnDeleteEvent(btn) {
 			let index = parseInt(event.target.parentElement.getAttribute("index"), 10);
 			let tasks = GetAllTasks();
@@ -105,6 +136,7 @@
 			return false;
 		}
 
+		// When we mark a task done by clicking on the checkbox
 		function OnDoneClickEvent(chk) {
 			let index = parseInt(event.target.parentElement.getAttribute("index"), 10);
 			let tasks = GetAllTasks();
